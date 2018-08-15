@@ -1,0 +1,42 @@
+Assignment 6.1 (a)
+getwd()
+p='C:/Users/Admin/Documents/acd'
+setwd(p)
+list.files()
+list.dirs()
+library(data.table)
+view(test.csv)
+Titanic<-read.csv("C:/Users/Admin/Documents/acd",header=F,sep="," )
+data=read.table("test.csv", header=T, sep=',')
+data=read.table("train.csv", header=T, sep=',')
+View(Titanic)
+
+train_raw       <- read.csv("train.csv", na.strings="")
+test_raw        <- read.csv("test.csv", na.strings="")
+head(Titanic)
+tail(Titanic)
+str(Titanic$Name) 
+Titanic$Name<-as.character(Titanic$Name)
+str(Titanic$Name)
+subtitles<-gsub("\\..*", "", Titanic$Name)
+head(subtitles)
+Title<-gsub(".*\\ ", "", subtitles)
+head(Title)
+familyname<-table(Titanic$`family name`)
+barplot(familyname,main = "survival as per family name", xlab = "family name", ylab = "count",col ="red")
+
+(b)
+
+SurvivedTitle<-table(TitanicData$Survived, TitanicData$Title)
+
+p<-SurvivedTitle[1,]
+
+barplot(p,xlab = "Title", ylab = "survived", 
+        main= "Survival as per title", col=rainbow(length(p)))
+
+(c)
+titanic$Age[is.na(titanic$Age)] <- with(res, ave(Age, Pclass, Title, 
+                                         FUN = function(x) median(x, na.rm=TRUE)))[is.na(titanic$Age)]
+
+summary(titanic$Age)
+
